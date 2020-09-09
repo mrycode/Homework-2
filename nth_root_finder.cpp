@@ -40,18 +40,6 @@ string FindNthRoot(int number, int nth, int precision) {
     }
   }
 
- 
-  /*
-  double start_precision_point = static_cast<double>(left_handside);
-  double end_precision_point = static_cast<double>(left_handside)+(1-(1/static_cast<double>(power_num(10, precision))));
-  double mid_precision_number = static_cast<double>(left_handside)+((1-(1/static_cast<double>(power_num(10, precision))))/2);
-
-  cout << mid_precision_number << endl;
-  */
-
-  //cout << power_num(5.5, 2) << endl;
-
-  //int precision_counter = precision;
   long double precision_number = static_cast<double>(left_handside);
   long double test_num = static_cast<double>(left_handside);
   long double round_up;
@@ -81,10 +69,3 @@ string FindNthRoot(int number, int nth, int precision) {
 
   return "";
 }
-/*
-if (power_num(precision_multiplier, nth) <= number) {
-        left_handside = precision_multiplier;
-      }
-      else if (power_num(precision_multiplier, nth) > number) {
-        break;
-      }*/
