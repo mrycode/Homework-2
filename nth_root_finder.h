@@ -1,6 +1,17 @@
 #ifndef ROOT_H
 #define ROOT_H
 
-string FindNthRoot(int, int, int);
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+int power_num(int number, int nth);
+long double power_num(double number, int nth);
+
+string FindNthRoot(int number, int nth, int precision);
+
+
 
 #endif

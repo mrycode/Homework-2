@@ -1,14 +1,18 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
+#include <iostream>
+#include <string>
 
-int MinWordLength(string words[]);
+using namespace std;
 
-int MaxWordLength(string words[]);
+int MinWordLength(string words[], int length);
 
-int WordLengthRange(string words[]);
+int MaxWordLength(string words[], int length);
 
-int AverageWordLength(string words[]);
+int WordLengthRange(string words[], int length);
 
-int MostCommonWordLength(string words[]);
+int AverageWordLength(string words[], int length);
+
+int MostCommonWordLength(string words[], int length);
 
 #endif
