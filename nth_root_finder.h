@@ -8,8 +8,8 @@
 
 using namespace std;
 
-int power_num(int number, int nth);
-long double power_num(double number, int nth);
+int PowerNum(int number, int nth);
+long double PowerNum(double number, int nth);
 
 string FindNthRoot(int number, int nth, int precision);
 

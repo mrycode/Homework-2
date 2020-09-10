@@ -1,6 +1,34 @@
 /****
 * PSEUDOCODE:
+* PowerNum accepts number and nth term
+*   for loop to increase the number by multiplying itself by nth times
 *
+* FindNthRoot accepts number, nth term and precision as arguments
+*   Initialize left most variable
+*     for loop integers until number is reached
+*       if passed integer into the power function is less than or equal to the number,
+*         then assign the integer to the left most variable
+*       else if passed integer into the power function is greater than the number,
+*         then break out of loop and the left most value has been located
+*   Initialize variable for precision variables, test variables, and output variables
+*   for loop incrementing for each precision position
+*     Initialize the precision position value by dividing the powers of 10
+*     for loop from 1 - 9 based on the precision position
+*       if passed integer into the power function is less than or equal to the number,
+*         then add the value to the precision position
+*       else if passed integer into the power function is greater than the number,
+*         then break out of loop and the precision position value has been located
+*   if precision index equal precision,
+*     then assign the values to the output variables
+*   else if precision index equal precision +1
+*     if output variable needs to round up
+*       then create object stringstream with rounded up output variable, 
+*       setprecision to requested precision, stream floar to string,
+*       and return string
+*     else if output variable does not need to round up
+*       then create object stringstream with output variable, 
+*       setprecision to requested precision, stream floar to string,
+*       and return string
 */
 #include <iostream>
 #include <iomanip>
@@ -9,15 +37,16 @@
 
 using namespace std;
 
-int power_num(int number, int nth) {
+//Create Power function to raise the number by the nth power
+int PowerNum(int number, int nth) {
   int power_counter = number;
   for (int nth_counter = 1; nth_counter < nth; nth_counter++) {
     power_counter *= number;
   }
   return power_counter;
 }
-
-long double power_num(long double number, int nth) {
+//Overload power_num to accept and output floating point values
+long double PowerNum(long double number, int nth) {
   double power_counter = number;
   for (int nth_counter = 1; nth_counter < nth; nth_counter++) {
     power_counter *= number;
@@ -25,76 +54,67 @@ long double power_num(long double number, int nth) {
   return power_counter;
 }
 
-
-
-
+//Function will find the nth root of a number
 string FindNthRoot(int number, int nth, int precision) {
   int left_handside;
-  //cout << fixed << showpoint << setprecision(precision+1);
 
+  //Loop through until the left most value is located and exit loop once located
   for (int integer = 0; integer < number; integer++) {
-    if (power_num(integer, nth) <= number) {
+    if (PowerNum(integer, nth) <= number) {
       left_handside = integer;
     }
-    else if (power_num(integer, nth) > number) {
+    else if (PowerNum(integer, nth) > number) {
       break;
     }
   }
-
+  
+  //Initialize variables for output, testing, and counters to track position
   long double precision_number = static_cast<double>(left_handside);
-  long double test_num = static_cast<double>(left_handside);
-  long double round_up, precision_location, precision_location_counter, output_precision_number, output_precision_number_round_up;
+  long double test_variable = static_cast<double>(left_handside);
+  long double round_up, precision_position, precision_position_counter, output_precision_number, output_precision_number_rounded_up;
   
-  
+  //Outer loop that sets the precision value to be used for testing and incrementing postion index
   for (int precision_index = 1; precision_index < precision + 2; precision_index++) {
-    precision_location = 1/static_cast<double>(power_num(10, precision_index));
-    precision_location_counter = 0;
-
+    //Initialize precision position value and precision counter
+    precision_position = 1/static_cast<double>(PowerNum(10, precision_index));
+    precision_position_counter = 0;
+    
+    //Inner loop to locate the value raised to the nth position
     for (int precision_counter = 0; precision_counter < 10; precision_counter++) {
-      test_num += precision_location;;
-      precision_location_counter += precision_location;
-      //cout << test_num << endl;
-      if (power_num(test_num, nth) < number) {
-        precision_number = test_num;
+      test_variable += precision_position;;
+      precision_position_counter += precision_position;
+      //If precision value is not found, then assign to the precision number to track the value
+      if (PowerNum(test_variable, nth) < number) {
+        precision_number = test_variable;
       }
-      else if (power_num(test_num, nth) >= number) {
-        round_up = test_num;
-        test_num = precision_number;
+      //If precision value is to large, then save the value as the rounded up value of the precision point and exit inner loop
+      else if (PowerNum(test_variable, nth) >= number) {
+        round_up = test_variable;
+        test_variable = precision_number;
         break;
       }
     }
-
-    //cout << precision_location_counter - precision_location << endl;
-    //cout << precision_location * 5 << endl;
-
+    
+    //If requested precision is reached, then assign the precision and the rounded up value to the output variables
     if (precision_index == precision) {
-      //cout << "setting" << endl;
       output_precision_number = precision_number;
-      output_precision_number_round_up = round_up;
+      output_precision_number_rounded_up = round_up;
     }
+    //If the precision index has reached the end of the outer loop, then test if the out put variable must round up
     else if (precision_index == precision+1) {
-      //cout << "in" << endl;
-      if (precision_location_counter - precision_location >= precision_location * 5) {
+      //If the precision position + 1 value is greater than or equal to 5, then convert the rounded up variable to a string and return the string output 
+      if (precision_position_counter - precision_position >= precision_position * 5) {
         stringstream output_string;
-        output_string << fixed << showpoint << setprecision(precision) << output_precision_number_round_up;
-        return output_string.str(); 
-        //cout << "this is a string " << test << endl;
-        //cout << output_precision_number_round_up << endl;
+        output_string << fixed << showpoint << setprecision(precision) << output_precision_number_rounded_up;
+        return output_string.str();
       }
       else {
+        //If the precision position + 1 value is less than 5, then convert the rounded up variable to a string and return the string output
         stringstream output_string;
         output_string << fixed << showpoint << setprecision(precision) << output_precision_number;
-        return output_string.str(); 
-        //cout << "this is a string " << test << endl;
-        //cout << output_precision_number << endl;
+        return output_string.str();
       }
     }
   }
-  //cout << precision_location_counter - precision_location << endl;
-  //cout << precision_number << endl;
-  //cout << round_up << endl;
-  
-  
-
   return "";
 }

@@ -30,7 +30,7 @@ int main() {
   cout << "Mode Length: " << MostCommonWordLength(names,list_size) << endl;
   */
 
-  cout << "string " << FindNthRoot(6, 2, 4) << endl;
+  cout << "string " << FindNthRoot(3, 6, 9) << endl;
 
   //2.4494897427832
 
