@@ -1,35 +1,3 @@
-/****
-* PSEUDOCODE:
-* PowerNum accepts number and nth term
-*   for loop to increase the number by multiplying itself by nth times
-*
-* FindNthRoot accepts number, nth term and precision as arguments
-*   Initialize left most variable
-*     for loop integers until number is reached
-*       if passed integer into the power function is less than or equal to the number,
-*         then assign the integer to the left most variable
-*       else if passed integer into the power function is greater than the number,
-*         then break out of loop and the left most value has been located
-*   Initialize variable for precision variables, test variables, and output variables
-*   for loop incrementing for each precision position
-*     Initialize the precision position value by dividing the powers of 10
-*     for loop from 1 - 9 based on the precision position
-*       if passed integer into the power function is less than or equal to the number,
-*         then add the value to the precision position
-*       else if passed integer into the power function is greater than the number,
-*         then break out of loop and the precision position value has been located
-*   if precision index equal precision,
-*     then assign the values to the output variables
-*   else if precision index equal precision +1
-*     if output variable needs to round up
-*       then create object stringstream with rounded up output variable, 
-*       setprecision to requested precision, stream floar to string,
-*       and return string
-*     else if output variable does not need to round up
-*       then create object stringstream with output variable, 
-*       setprecision to requested precision, stream floar to string,
-*       and return string
-*/
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -66,7 +34,40 @@ long double PowerNum(long double number, int nth) {
   return power_counter;
 }
 
-//Function will find the nth root of a number
+/****
+* PSEUDOCODE:
+* PowerNum accepts number and nth term
+*   for loop to increase the number by multiplying itself by nth times
+*
+* FindNthRoot accepts number, nth term and precision as arguments
+*   Initialize left most variable
+*     for loop integers until number is reached
+*       if passed integer into the power function is less than or equal to the number,
+*         then assign the integer to the left most variable
+*       else if passed integer into the power function is greater than the number,
+*         then break out of loop and the left most value has been located
+*   If precision is 0, then return let most variable
+*   else
+*     Initialize variable for precision variables, test variables, and output variables
+*     for loop incrementing for each precision position
+*       Initialize the precision position value by dividing the powers of 10
+*       for loop from 1 - 9 based on the precision position
+*         if passed integer into the power function is less than or equal to the number,
+*           then add the value to the precision position
+*         else if passed integer into the power function is greater than the number,
+*           then break out of loop and the precision position value has been located
+*     if precision index equal precision,
+*       then assign the values to the output variables
+*     else if precision index equal precision +1
+*       if output variable needs to round up
+*         then create object stringstream with rounded up output variable, 
+*         setprecision to requested precision, stream floar to string,
+*         and return string
+*       else if output variable does not need to round up
+*         then create object stringstream with output variable, 
+*         setprecision to requested precision, stream floar to string,
+*         and return string
+*/
 string FindNthRoot(int number, int nth, int precision) {
   int left_handside;
 
