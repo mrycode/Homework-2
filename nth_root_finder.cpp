@@ -38,19 +38,31 @@
 using namespace std;
 
 //Create Power function to raise the number by the nth power
-int PowerNum(int number, int nth) {
-  int power_counter = number;
-  for (int nth_counter = 1; nth_counter < nth; nth_counter++) {
-    power_counter *= number;
+long long int PowerNum(int number, int nth) {
+  long long int power_counter = number;
+  if (nth == 0) {
+    return 1;
   }
+  else {
+    for (int nth_counter = 1; nth_counter < nth; nth_counter++) {
+      power_counter *= number;
+    }
+  }
+  
   return power_counter;
 }
 //Overload power_num to accept and output floating point values
 long double PowerNum(long double number, int nth) {
   double power_counter = number;
-  for (int nth_counter = 1; nth_counter < nth; nth_counter++) {
-    power_counter *= number;
+  if (nth == 0) {
+    return 1;
   }
+  else {
+    for (int nth_counter = 1; nth_counter < nth; nth_counter++) {
+      power_counter *= number;
+    }
+  }
+  
   return power_counter;
 }
 
@@ -68,51 +80,63 @@ string FindNthRoot(int number, int nth, int precision) {
     }
   }
   
-  //Initialize variables for output, testing, and counters to track position
-  long double precision_number = static_cast<double>(left_handside);
-  long double test_variable = static_cast<double>(left_handside);
-  long double round_up, precision_position, precision_position_counter, output_precision_number, output_precision_number_rounded_up;
-  
-  //Outer loop that sets the precision value to be used for testing and incrementing postion index
-  for (int precision_index = 1; precision_index < precision + 2; precision_index++) {
-    //Initialize precision position value and precision counter
-    precision_position = 1/static_cast<double>(PowerNum(10, precision_index));
-    precision_position_counter = 0;
+  if (precision==0){
+    stringstream output_string;
+    output_string << left_handside;
+    return output_string.str();
+  }
+  else {
+    //Initialize variables for output, testing, and counters to track position
+    long double precision_number = static_cast<double>(left_handside);
+    long double test_variable = static_cast<double>(left_handside);
+    long double round_up, precision_position, precision_position_counter, output_precision_number, output_precision_number_rounded_up;
+
+    //Outer loop that sets the precision value to be used for testing and incrementing postion index
+    for (int precision_index = 1; precision_index < precision + 2; precision_index++) {
+
+      //Initialize precision position value and precision counter
+      precision_position = 1/static_cast<double>(PowerNum(10, precision_index));
+      precision_position_counter = 0;
+      
+      //Inner loop to locate the value raised to the nth position
+      for (int precision_counter = 0; precision_counter < 10; precision_counter++) {
+        test_variable += precision_position;;
+        precision_position_counter += precision_position;
+
+        //If precision value is not found, then assign to the precision number to track the value
+        if (PowerNum(test_variable, nth) < number) {
+          precision_number = test_variable;
+        }
+
+        //If precision value is to large, then save the value as the rounded up value of the precision point and exit inner loop
+        else if (PowerNum(test_variable, nth) >= number) {
+          round_up = test_variable;
+          test_variable = precision_number;
+          break;
+        }
+      }
     
-    //Inner loop to locate the value raised to the nth position
-    for (int precision_counter = 0; precision_counter < 10; precision_counter++) {
-      test_variable += precision_position;;
-      precision_position_counter += precision_position;
-      //If precision value is not found, then assign to the precision number to track the value
-      if (PowerNum(test_variable, nth) < number) {
-        precision_number = test_variable;
+      //If requested precision is reached, then assign the precision and the rounded up value to the output variables
+      if (precision_index == precision) {
+        output_precision_number = precision_number;
+        output_precision_number_rounded_up = round_up;
       }
-      //If precision value is to large, then save the value as the rounded up value of the precision point and exit inner loop
-      else if (PowerNum(test_variable, nth) >= number) {
-        round_up = test_variable;
-        test_variable = precision_number;
-        break;
-      }
-    }
-    
-    //If requested precision is reached, then assign the precision and the rounded up value to the output variables
-    if (precision_index == precision) {
-      output_precision_number = precision_number;
-      output_precision_number_rounded_up = round_up;
-    }
-    //If the precision index has reached the end of the outer loop, then test if the out put variable must round up
-    else if (precision_index == precision+1) {
-      //If the precision position + 1 value is greater than or equal to 5, then convert the rounded up variable to a string and return the string output 
-      if (precision_position_counter - precision_position >= precision_position * 5) {
-        stringstream output_string;
-        output_string << fixed << showpoint << setprecision(precision) << output_precision_number_rounded_up;
-        return output_string.str();
-      }
-      else {
-        //If the precision position + 1 value is less than 5, then convert the rounded up variable to a string and return the string output
-        stringstream output_string;
-        output_string << fixed << showpoint << setprecision(precision) << output_precision_number;
-        return output_string.str();
+      //If the precision index has reached the end of the outer loop, then test if the out put variable must round up
+      else if (precision_index == precision+1) {
+
+        //If the precision position + 1 value is greater than or equal to 5, then convert the rounded up variable to a string and return the string output 
+        if (precision_position_counter - precision_position >= precision_position * 5) {
+          stringstream output_string;
+          output_string << fixed << showpoint << setprecision(precision) << output_precision_number_rounded_up;
+         return output_string.str();
+        }
+        else {
+
+          //If the precision position + 1 value is less than 5, then convert the rounded up variable to a string and return the string output
+          stringstream output_string;
+          output_string << fixed << showpoint << setprecision(precision) << output_precision_number;
+          return output_string.str();
+        }
       }
     }
   }

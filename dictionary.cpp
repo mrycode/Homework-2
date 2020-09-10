@@ -33,8 +33,8 @@ int MinWordLength(string words[], int length) {
 * return largest word length value
 */
 int MaxWordLength(string words[], int length) {
-    //Locate the max word length
     int max_word_length = words[0].length();
+    //Locate the max word length
     for (int index = 1; index < length; index++) {
       if (words[index].length() > max_word_length) {
         max_word_length = words[index].length();
@@ -61,15 +61,15 @@ int MaxWordLength(string words[], int length) {
 */
 
 int WordLengthRange(string words[], int length) {
-    //Locate the min word length
     int min_word_length = words[0].length();
+    //Locate the min word length
     for (int index = 1; index < length; index++) {
       if (words[index].length() < min_word_length) {
         min_word_length = words[index].length();
       }
     }
-    //Locate the max word length
     int max_word_length = words[0].length();
+    //Locate the max word length
     for (int index = 1; index < length; index++) {
       if (words[index].length() > max_word_length) {
         max_word_length = words[index].length();

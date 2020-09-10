@@ -12,14 +12,13 @@ int main() {
   /* Search
   int list[] = {1,2,4,5,6,7,8,9};
   int array_length = 8;
-  int number = 11;
+  int number = 4;
   
   std::cout << "Linear Search: " << LinearSearch(list,array_length,number) <<  std::endl;
 
   std::cout << "Binar Search: " << BinarySearch(list,array_length,number) <<  std::endl;
-  */
   
-  /*
+  
   string names[] = {"a", "bb", "bb", "bb", "ccc", "ccc", "ccc", "ccc"};
   int list_size = 8;
 
@@ -30,7 +29,7 @@ int main() {
   cout << "Mode Length: " << MostCommonWordLength(names,list_size) << endl;
   */
 
-  cout << "string " << FindNthRoot(3, 6, 9) << endl;
+  cout << "string " << FindNthRoot(6, 2, 13) << endl;
 
   //2.4494897427832
 
