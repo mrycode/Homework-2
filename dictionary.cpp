@@ -4,7 +4,12 @@ using namespace std;
 
 /****
 * PSEUDOCODE:
-*
+* MinWordLength take in a list and list size as arguments
+* Initialize word length with first element in list to use as initial comparison
+* For loop through list size
+* if element in list's word length is less than the currnet smallest word legth,
+*   then replace the smallest word length to new smallest word length value
+* return smallest word length value
 */
 int MinWordLength(string words[], int length) {
     //Locate the min word length
@@ -20,7 +25,12 @@ int MinWordLength(string words[], int length) {
 
 /****
 * PSEUDOCODE:
-*
+* MaxWordLength take in a list and list size as arguments
+* Initialize word length with first element in list to use as initial comparison
+* For loop through list size
+* if element in list's word length is greater than the currnet largest word legth,
+*   then replace the largest word length to new largest word length value
+* return largest word length value
 */
 int MaxWordLength(string words[], int length) {
     //Locate the max word length
@@ -36,8 +46,20 @@ int MaxWordLength(string words[], int length) {
 
 /****
 * PSEUDOCODE:
-*
+* WordLengthRange take in a list and list size as arguments
+* Find smallest word length
+*   Initialize word length with first element in list to use as initial comparison
+*   For loop through list size
+*   if element in list's word length is less than the currnet smallest word legth,
+*     then replace the smallest word length to new smallest word length value
+* Find largest word length
+*   Initialize word length with first element in list to use as initial comparison
+*   For loop through list size
+*   if element in list's word length is greater than the currnet largest word legth,
+*     then replace the largest word length to new largest word length value
+* return range (largest word length - smallest word length)
 */
+
 int WordLengthRange(string words[], int length) {
     //Locate the min word length
     int min_word_length = words[0].length();
@@ -69,7 +91,17 @@ int AverageWordLength(string words[], int length) {
 
 /****
 * PSEUDOCODE:
-*
+* MostCommonWordLength take in a list and list size as arguments
+* Initialize variables to hold mode, mode counter, test value and test value conuter
+* Outer for loop through index size to compare each element to itself
+*   Initialize test mode and test mode counter
+*   if test mode counter is less than mode counter
+*     for loop through index to provide the value for camparison to the outer loop
+*       if outer test mode equals the compared value,
+*         then increment the test mode counter
+*     if test mode counter is greater than mode counter,
+*       then replace mode and mode counter with test mode and test mode counter
+* return mode number that has the highest mode counter
 */
 int MostCommonWordLength(string words[], int length) {
     int mode_num = 0;

@@ -18,7 +18,7 @@ int LinearSearch(int numbers[], int length, int find_number) {
 * PSEUDOCODE:
 * BinarySearch takes in the arguments list, list size and number to find.
 * Initialize local variables for start, mid, and end points of list.
-* Loop through the list and adjust the mid_point of list to attempt to
+* While loop through the list and adjust the mid_point of list to attempt to
 * locate the number to find is in the list.
 * Return index if the mid_point matches the number to find.
 * If mid_point number is less than the number to find, change start point to
@@ -29,20 +29,24 @@ int LinearSearch(int numbers[], int length, int find_number) {
 */
 int BinarySearch(int numbers[], int length, int find_number) {
   int start_point = 0;
-  int mid_point = length/2;
-  int end_point = length;
-  for (int index=0; index < length; index++) {
-    if (numbers[index] == find_number) {
-      return index;
+  int mid_point;
+  int end_point = length-1;
+
+  bool found = false;
+
+  while (!found && start_point <= end_point) {
+    mid_point = (start_point + end_point)/2;
+
+    if (numbers[mid_point] == find_number) {
+      found = true;
+      return mid_point;
     }
-    else if (numbers[index] < find_number) {
-      start_point = mid_point++;
-      mid_point = (start_point+end_point)/2;
+    else if (numbers[mid_point] > find_number) {
+      end_point = mid_point - 1;
     }
-    else if (numbers[index] > find_number) {
-      end_point = mid_point--;
-      mid_point = (start_point+end_point)/2;
+    else {
+      start_point = mid_point + 1;
     }
   }
-     return -1;
+  return -1;
 }

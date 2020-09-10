@@ -1,9 +1,10 @@
 #include <iostream>
 #include "nth_root_finder.h"
-//#include "search.h"
-//#include "dictionary.h"
+#include "search.h"
+#include "dictionary.h"
 #include <string>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ int main() {
   /* Search
   int list[] = {1,2,4,5,6,7,8,9};
   int array_length = 8;
-  int number = 3;
+  int number = 11;
   
   std::cout << "Linear Search: " << LinearSearch(list,array_length,number) <<  std::endl;
 
@@ -29,8 +30,9 @@ int main() {
   cout << "Mode Length: " << MostCommonWordLength(names,list_size) << endl;
   */
 
-  FindNthRoot(6, 2, 7);
+  cout << "string " << FindNthRoot(6, 2, 4) << endl;
 
-  //2.449489743
+  //2.4494897427832
+
   return 0;
 }
