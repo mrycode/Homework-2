@@ -53,7 +53,7 @@ long long int PowerNum(int number, int nth) {
 }
 //Overload power_num to accept and output floating point values
 long double PowerNum(long double number, int nth) {
-  double power_counter = number;
+  long double power_counter = number;
   if (nth == 0) {
     return 1;
   }
@@ -80,7 +80,7 @@ string FindNthRoot(int number, int nth, int precision) {
     }
   }
   
-  if (precision==0){
+  if (precision == 0){
     stringstream output_string;
     output_string << left_handside;
     return output_string.str();
