@@ -1,15 +1,11 @@
-#include <iostream>
+
 #include "nth_root_finder.h"
 #include "search.h"
 #include "dictionary.h"
-#include <string>
-#include <iomanip>
-#include <sstream>
 
-using namespace std;
 
 int main() {
-  /* Search
+  //Search
   int list[] = {1,2,4,5,6,7,8,9};
   int array_length = 8;
   int number = 4;
@@ -27,7 +23,7 @@ int main() {
   cout << "Range Length: " << WordLengthRange(names,list_size) << endl;
   cout << "Average Length: " << AverageWordLength(names,list_size) << endl;
   cout << "Mode Length: " << MostCommonWordLength(names,list_size) << endl;
-  */
+  
 
   cout << "string " << FindNthRoot(6, 2, 13) << endl;
 

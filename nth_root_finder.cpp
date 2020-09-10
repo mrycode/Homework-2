@@ -1,9 +1,4 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <sstream>
-
-using namespace std;
+#include "nth_root_finder.h"
 
 /****
 * PSEUDOCODE:
